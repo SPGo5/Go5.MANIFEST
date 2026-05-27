@@ -1,0 +1,20 @@
+{
+  "name": "五 Go — 觀音靈簽 GYO",
+  "short_name": "GYO Oracle",
+  "start_url": ".",
+  "display": "browser",
+  "background_color": "#000073",
+  "theme_color": "#000073",
+  "icons": [
+    {
+      "src": "https://i.postimg.cc/qvj17BkP/Lladro-Guan-Yin-1500x1500-glow-green-linear-255-200.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://i.postimg.cc/qvj17BkP/Lladro-Guan-Yin-1500x1500-glow-green-linear-255-200.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

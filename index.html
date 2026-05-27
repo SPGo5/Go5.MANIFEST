@@ -35,256 +35,321 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>QMDJ Manifestation · Tsutsuji</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,700;1,300;1,400&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://spgo5.github.io/Go5.SHARED/spgo-core.css?v=2">
 <style>
+
 /* ── QMDJ Portal-specific CSS only ──
-   Rules: Do NOT redefine .screen, html/body, :root base tokens,
-   .inner-header, .back-btn, .back-btn-label, .inner-title,
-   .card, .card-*, .portal-footer, button:active, @keyframes fadeIn
-   — all inherited from spgo-core.css
+   Only styles that have NO equivalent in spgo-core.css live here.
+   Do not override any shared token, class or component.
 */
 
-/* Portal gold palette — extends shared tokens, does not override --gold from shared */
-:root {
-  --qgold:      #c9a84c;
-  --qgold-light: #e8cc80;
-  --qgold-dim:  rgba(201,168,76,0.3);
-}
-
-/* ── Login screen portal branding ── */
-#screen-qmdj-login {
-  gap: 0;
-}
-.qmdj-login-logo {
-  width: 110px; height: auto; object-fit: contain;
-  filter: drop-shadow(0 0 10px rgba(201,168,76,0.9)) drop-shadow(0 0 30px rgba(201,168,76,0.5));
-  margin-bottom: 18px; margin-top: 40px;
-}
-.qmdj-login-title {
-  font-family: 'Cinzel', serif; font-size: 13px; letter-spacing: 0.3em;
-  color: var(--qgold); text-transform: uppercase; text-align: center; margin-bottom: 6px;
-}
-.qmdj-login-sub {
-  font-family: 'IM Fell English', serif; font-style: italic; font-size: 22px;
-  color: rgba(255,245,220,0.85); text-align: center; margin-bottom: 40px;
-}
-
-/* ── Splash ── */
-#screen-qmdj-splash {
-  justify-content: center; padding: 40px 20px;
-  background:
-    radial-gradient(ellipse at 50% 40%, rgba(201,168,76,0.08) 0%, transparent 70%),
-    linear-gradient(180deg, #000020 0%, #000050 50%, #000020 100%);
-}
-.splash-img {
-  max-height: 52dvh; max-width: 90%; width: auto; object-fit: contain;
-  animation: splashPulse 2.5s ease-in-out infinite;
+/* Menu logo block — mirrors .gyo-menu-logo pattern */
+.qmdj-menu-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin-bottom: 32px;
 }
-@keyframes splashPulse {
+.qmdj-menu-logo img {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 10px rgba(201,168,76,0.8)) drop-shadow(0 0 28px rgba(201,168,76,0.4));
+  margin-bottom: 14px;
+}
+.qmdj-menu-logo-title {
+  font-family: 'Cinzel', serif;
+  font-size: 15px;
+  letter-spacing: 0.25em;
+  color: #c9a84c;
+  margin-bottom: 4px;
+}
+.qmdj-menu-logo-sub {
+  font-family: 'IM Fell English', serif;
+  font-style: italic;
+  font-size: 18px;
+  color: rgba(255,245,220,0.7);
+  letter-spacing: 0.05em;
+}
+
+/* ── Manifesting splash screen ── */
+#screen-qmdj-splash {
+  justify-content: center;
+  padding: 40px 20px;
+  position: relative;
+  overflow: hidden;
+}
+.qmdj-splash-img {
+  max-height: 50dvh;
+  max-width: 90%;
+  width: auto;
+  object-fit: contain;
+  margin-bottom: 28px;
+  animation: qmdjPulse 2.5s ease-in-out infinite;
+}
+@keyframes qmdjPulse {
   0%,100% { filter: drop-shadow(0 0 10px rgba(201,168,76,0.7)) drop-shadow(0 0 30px rgba(201,168,76,0.3)); transform: scale(1); }
-  50%      { filter: drop-shadow(0 0 24px rgba(201,168,76,1)) drop-shadow(0 0 60px rgba(201,168,76,0.6)); transform: scale(1.03); }
+  50%      { filter: drop-shadow(0 0 24px rgba(201,168,76,1))   drop-shadow(0 0 60px rgba(201,168,76,0.6)); transform: scale(1.03); }
 }
-.manifesting-label {
-  font-family: 'Cinzel', serif; font-size: 13px; letter-spacing: 0.35em;
-  text-transform: uppercase; color: var(--qgold);
-  animation: labelPulse 2.5s ease-in-out infinite; margin-bottom: 10px;
+.qmdj-manifesting-label {
+  font-family: 'Cinzel', serif;
+  font-size: 13px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: #c9a84c;
+  animation: qmdjLabelPulse 2.5s ease-in-out infinite;
+  margin-bottom: 8px;
 }
-@keyframes labelPulse { 0%,100% { opacity: 0.5; } 50% { opacity: 1; } }
-.manifesting-dots {
-  font-family: 'Crimson Pro', serif; font-size: 18px; font-style: italic;
-  color: rgba(255,255,255,0.5); min-height: 28px; text-align: center;
+@keyframes qmdjLabelPulse { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+.qmdj-manifesting-dots {
+  font-family: 'Crimson Pro', serif;
+  font-style: italic;
+  font-size: 18px;
+  color: rgba(255,255,255,0.45);
+  min-height: 28px;
+  text-align: center;
+  margin-bottom: 20px;
 }
-.splash-progress { display: flex; gap: 12px; margin-top: 24px; }
-.progress-dot {
+.qmdj-progress {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+.qmdj-dot {
   width: 8px; height: 8px; border-radius: 50%;
-  background: rgba(201,168,76,0.2); border: 1px solid rgba(201,168,76,0.4);
+  background: rgba(201,168,76,0.2);
+  border: 1px solid rgba(201,168,76,0.4);
   transition: background 0.5s, box-shadow 0.5s;
 }
-.progress-dot.lit {
-  background: var(--qgold);
+.qmdj-dot.lit {
+  background: #c9a84c;
   box-shadow: 0 0 8px rgba(201,168,76,0.9), 0 0 20px rgba(201,168,76,0.5);
 }
-.done-btn {
-  display: none; margin-top: 28px; padding: 14px 40px;
-  background: rgba(201,168,76,0.12); border: 1px solid var(--qgold-dim);
-  border-radius: 12px; font-family: 'Cinzel', serif; font-size: 12px;
-  letter-spacing: 0.18em; color: var(--qgold); cursor: pointer;
+.qmdj-done-btn {
+  display: none;
+  padding: 14px 32px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(0,191,255,0.3);
+  border-radius: 10px;
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: var(--sky);
+  cursor: pointer;
   animation: fadeIn 0.5s ease;
 }
 
-/* ── Menu header ── */
-.qmdj-menu-header {
-  display: flex; flex-direction: column; align-items: center;
-  padding: 40px 0 24px; width: 100%; max-width: 420px;
+/* ── Manifest form — portal-specific fields only ── */
+#screen-qmdj-form { padding-bottom: 60px; }
+.qmdj-section-label {
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 10px;
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
-.qmdj-menu-logo {
-  width: 80px; height: 80px; object-fit: contain;
-  filter: drop-shadow(0 0 12px rgba(201,168,76,0.8)) drop-shadow(0 0 30px rgba(201,168,76,0.4));
-  margin-bottom: 14px;
+.qmdj-section-label::after { content: ''; flex: 1; height: 1px; background: rgba(255,255,255,0.08); }
+.qmdj-field-label {
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 6px;
 }
-.qmdj-menu-title {
-  font-family: 'Cinzel', serif; font-size: 13px; letter-spacing: 0.3em;
-  color: var(--qgold); text-transform: uppercase; text-align: center; margin-bottom: 4px;
-}
-.qmdj-menu-sub {
-  font-family: 'IM Fell English', serif; font-style: italic; font-size: 20px;
-  color: rgba(255,245,220,0.8); text-align: center;
-}
-.ornament { color: var(--qgold); opacity: 0.4; font-size: 14px; letter-spacing: 0.3em; text-align: center; margin: 10px 0 18px; }
-
-/* ── Form ── */
-.form-wrap { width: 100%; max-width: 480px; display: flex; flex-direction: column; gap: 22px; }
-.section-label {
-  font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.22em;
-  text-transform: uppercase; color: var(--qgold); margin-bottom: 8px;
-  display: flex; align-items: center; gap: 8px;
-}
-.section-label::after { content: ''; flex: 1; height: 1px; background: var(--qgold-dim); }
-.field-group { display: flex; flex-direction: column; gap: 12px; }
-.field-label {
-  font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.15em;
-  text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 4px;
-}
-textarea, input[type=text] {
-  width: 100%; border-radius: 12px; border: 1px solid rgba(0,191,255,0.25);
-  background: rgba(0,0,0,0.35); color: #fff;
-  font-size: 15px; font-family: 'Crimson Pro', serif;
-  padding: 14px 16px; outline: none; resize: none; line-height: 1.6;
+.qmdj-field-wrap { margin-bottom: 14px; }
+.qmdj-textarea {
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.05);
+  color: #f5f0e8;
+  font-size: 15px;
+  font-family: 'Crimson Pro', serif;
+  padding: 12px 14px;
+  outline: none;
+  resize: none;
+  line-height: 1.6;
   transition: border-color 0.2s;
 }
-textarea:focus, input[type=text]:focus { border-color: var(--qgold); }
-textarea::placeholder, input::placeholder { color: rgba(255,255,255,0.2); font-style: italic; }
+.qmdj-textarea:focus { border-color: var(--sky); }
+.qmdj-textarea::placeholder { color: rgba(255,255,255,0.2); font-style: italic; }
 
-/* ── Commitment ── */
-.commitment-list { display: flex; flex-direction: column; gap: 10px; }
-.commitment-item { display: flex; align-items: flex-start; gap: 10px; }
-.commitment-bullet { color: var(--qgold); font-size: 18px; margin-top: 14px; flex-shrink: 0; }
-.commitment-item textarea { flex: 1; }
-.commitment-remove {
-  background: none; border: none; color: rgba(255,100,100,0.5);
-  font-size: 20px; cursor: pointer; padding: 10px 4px; flex-shrink: 0; line-height: 1; margin-top: 8px;
+/* Commitment list */
+.qmdj-commitment-wrap { display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; }
+.qmdj-commitment-item { display: flex; align-items: flex-start; gap: 10px; }
+.qmdj-commitment-bullet { color: var(--sky); font-size: 16px; margin-top: 14px; flex-shrink: 0; }
+.qmdj-commitment-item .qmdj-textarea { flex: 1; }
+.qmdj-remove-btn {
+  background: none; border: none; color: rgba(255,80,80,0.5);
+  font-size: 20px; cursor: pointer; padding: 10px 2px; flex-shrink: 0; line-height: 1; margin-top: 8px;
 }
-.add-commitment-btn {
-  background: none; border: 1px dashed rgba(201,168,76,0.4); border-radius: 10px;
-  color: var(--qgold); font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.12em;
-  padding: 12px; cursor: pointer; width: 100%;
+.qmdj-add-btn {
+  width: 100%; padding: 12px;
+  background: rgba(255,255,255,0.04);
+  border: 1px dashed rgba(0,191,255,0.3);
+  border-radius: 10px;
+  font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.12em;
+  color: var(--sky); cursor: pointer;
+  margin-bottom: 28px;
 }
 
-/* ── Manifest button ── */
-.manifest-section { display: flex; flex-direction: column; align-items: center; gap: 14px; margin-top: 10px; width: 100%; max-width: 480px; }
-.manifest-btn {
-  width: 100%; max-width: 320px; padding: 18px;
-  background: linear-gradient(135deg, #8B6914, #c9a84c, #8B6914);
-  border: 1px solid var(--qgold-light); border-radius: 14px;
-  font-family: 'Cinzel', serif; font-size: 15px; font-weight: 700;
-  letter-spacing: 0.18em; color: #000030; cursor: pointer;
-  box-shadow: 0 0 20px rgba(201,168,76,0.4), 0 0 50px rgba(201,168,76,0.15);
+/* Manifest button */
+.qmdj-manifest-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; width: 100%; }
+.qmdj-manifest-btn {
+  width: 100%; max-width: 300px; padding: 17px;
+  background: #fffde0;
+  border: 1.5px solid #fff9a0;
+  border-radius: 8px;
+  font-family: 'IM Fell English', serif;
+  font-size: 18px; font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #000073;
+  cursor: pointer;
+  box-shadow: 0 0 4px rgba(255,245,80,0.95), 0 0 22px rgba(255,248,140,0.45);
+  transition: background 0.15s, transform 0.1s;
 }
-.manifest-hint {
-  font-family: 'IM Fell English', serif; font-style: italic;
-  font-size: 13px; color: rgba(255,255,255,0.35); text-align: center; line-height: 1.7;
+.qmdj-manifest-btn:active { transform: scale(0.98); }
+.qmdj-manifest-hint {
+  font-family: 'Crimson Pro', serif;
+  font-style: italic;
+  font-size: 13px;
+  color: rgba(255,255,255,0.3);
+  text-align: center;
+  line-height: 1.7;
 }
 
 /* ── Result card ── */
-.result-card {
-  width: 100%; max-width: 480px;
-  background: rgba(201,168,76,0.05);
-  border: 1px solid var(--qgold-dim); border-radius: 20px;
-  padding: 28px 24px; margin-top: 8px;
+#screen-qmdj-result { padding-bottom: 60px; }
+.qmdj-result-card {
+  width: 100%; max-width: 420px;
+  border: 1px solid rgba(0,191,255,0.22);
+  border-radius: 14px;
+  padding: 20px 18px;
+  background: rgba(255,255,255,0.05);
+  margin-bottom: 16px;
 }
-.result-section-title {
-  font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.22em;
-  text-transform: uppercase; color: var(--qgold); margin-bottom: 12px;
+.qmdj-result-section {
+  font-family: 'Cinzel', serif;
+  font-size: 10px; letter-spacing: 0.18em;
+  text-transform: uppercase; color: rgba(255,255,255,0.35);
+  margin-bottom: 12px; margin-top: 18px;
   display: flex; align-items: center; gap: 8px;
 }
-.result-section-title::after { content: ''; flex: 1; height: 1px; background: var(--qgold-dim); }
-.result-field { margin-bottom: 18px; }
-.result-field-label {
-  font-family: 'Cinzel', serif; font-size: 8px; letter-spacing: 0.15em;
-  text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 5px;
+.qmdj-result-section:first-child { margin-top: 0; }
+.qmdj-result-section::after { content: ''; flex: 1; height: 1px; background: rgba(255,255,255,0.08); }
+.qmdj-result-field-label {
+  font-family: 'Cinzel', serif;
+  font-size: 9px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: rgba(255,255,255,0.25);
+  margin-bottom: 4px;
 }
-.result-field-value { font-family: 'Cormorant Garamond', serif; font-size: 17px; color: #fff; line-height: 1.6; }
-.result-commitment-item {
-  display: flex; align-items: flex-start; gap: 10px; margin-bottom: 8px;
-  font-family: 'Cormorant Garamond', serif; font-size: 17px; color: #fff; line-height: 1.6;
+.qmdj-result-field-value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px; color: #f5f0e8; line-height: 1.5;
+  margin-bottom: 14px;
 }
-.result-bullet { color: var(--qgold); flex-shrink: 0; margin-top: 2px; }
-.result-datetime {
-  font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.12em;
-  color: rgba(255,255,255,0.35); text-align: center; margin-top: 18px; padding-top: 18px;
-  border-top: 1px solid var(--qgold-dim);
+.qmdj-result-commit-item {
+  display: flex; align-items: flex-start; gap: 10px;
+  margin-bottom: 10px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px; color: #f5f0e8; line-height: 1.5;
 }
-.result-actions { display: flex; gap: 10px; margin-top: 20px; width: 100%; max-width: 480px; }
-.result-actions button {
-  flex: 1; padding: 14px 8px; border-radius: 12px;
-  font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.12em;
-  cursor: pointer; border: 1px solid var(--qgold-dim);
-  background: rgba(201,168,76,0.08); color: var(--qgold);
+.qmdj-result-bullet { color: var(--sky); flex-shrink: 0; margin-top: 3px; }
+.qmdj-result-datetime {
+  font-family: 'Cinzel', serif;
+  font-size: 9px; letter-spacing: 0.1em;
+  color: rgba(255,245,220,0.35);
+  text-align: center; margin-top: 18px; padding-top: 14px;
+  border-top: 1px solid rgba(255,255,255,0.08);
 }
-.result-actions button:active { background: rgba(201,168,76,0.18); }
+.qmdj-result-actions {
+  display: flex; gap: 8px;
+  width: 100%; max-width: 420px; margin-bottom: 10px;
+}
+.qmdj-result-actions button {
+  flex: 1; padding: 10px 4px;
+  border-radius: 8px;
+  font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.08em;
+  cursor: pointer;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.07);
+  color: rgba(255,255,255,0.8);
+  transition: background 0.2s;
+}
+.qmdj-result-actions button:active { opacity: 0.7; transform: scale(0.97); }
+.qmdj-result-actions .btn-download { border-color: rgba(0,191,255,0.4); color: var(--sky); }
+.qmdj-result-actions .btn-del     { border-color: rgba(255,80,80,0.35); color: rgba(255,130,130,0.8); }
 
-/* ── History ── */
-.history-note {
-  font-family: 'Crimson Pro', serif; font-style: italic; font-size: 13px;
-  color: rgba(255,100,100,0.8); text-align: center;
-  width: 100%; max-width: 480px; margin-bottom: 16px; line-height: 1.6;
+/* ── History screen ── */
+#screen-qmdj-history { padding-top: 0; }
+.qmdj-privacy-note {
+  font-family: 'Crimson Pro', serif;
+  font-size: 13px; color: #ff6666;
+  text-align: center; margin-bottom: 18px; max-width: 380px;
 }
-.history-card {
-  width: 100%; max-width: 480px;
-  background: rgba(201,168,76,0.04); border: 1px solid rgba(201,168,76,0.2);
-  border-radius: 16px; padding: 18px 20px; margin-bottom: 12px; cursor: pointer;
+.qmdj-hist-card {
+  width: 100%; max-width: 420px;
+  border: 1px solid rgba(0,191,255,0.22);
+  border-radius: 14px; padding: 14px 16px; margin-bottom: 10px;
+  background: rgba(255,255,255,0.05);
+  cursor: pointer; transition: background 0.2s;
 }
-.history-card:active { background: rgba(201,168,76,0.1); }
-.history-card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
-.history-card-num { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.15em; color: var(--qgold); text-transform: uppercase; }
-.history-card-date { font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 0.08em; color: rgba(255,255,255,0.35); }
-.history-card-outcome {
-  font-family: 'Cormorant Garamond', serif; font-size: 16px; color: #fff; line-height: 1.5;
+.qmdj-hist-card:active { background: rgba(0,191,255,0.08); }
+.qmdj-hist-card-top {
+  display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;
+}
+.qmdj-hist-card-num {
+  font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.15em;
+  color: rgba(255,255,255,0.35); text-transform: uppercase;
+}
+.qmdj-hist-card-date {
+  font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 0.08em;
+  color: rgba(255,245,220,0.35);
+}
+.qmdj-hist-card-preview {
+  font-family: 'Cormorant Garamond', serif; font-size: 17px; color: #f5f0e8; line-height: 1.5;
   overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
 }
-.history-card-tags { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
-.history-tag {
+.qmdj-hist-card-tags { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+.qmdj-hist-tag {
   font-family: 'Cinzel', serif; font-size: 8px; letter-spacing: 0.1em;
   padding: 3px 8px; border-radius: 20px;
-  background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.25); color: var(--qgold);
+  background: rgba(0,191,255,0.08); border: 1px solid rgba(0,191,255,0.2); color: var(--sky);
 }
-.history-empty {
+.qmdj-hist-empty {
   font-family: 'IM Fell English', serif; font-style: italic;
-  font-size: 18px; color: rgba(255,255,255,0.35); text-align: center; margin-top: 40px;
+  font-size: 18px; color: rgba(255,255,255,0.25); text-align: center; margin-top: 40px;
 }
 
 /* ── Detail modal ── */
-#detail-modal {
+#qmdj-detail-modal {
   display: none; position: fixed; inset: 0; z-index: 9999;
-  background: rgba(0,0,20,0.92); align-items: flex-start; justify-content: center;
+  background: rgba(0,0,30,0.92); align-items: flex-start; justify-content: center;
   padding: 20px; overflow-y: auto;
 }
-#detail-modal.open { display: flex; }
-.detail-inner {
-  width: 100%; max-width: 480px; margin: auto;
-  background: linear-gradient(180deg, #000040, #000030);
-  border: 1px solid var(--qgold-dim); border-radius: 20px;
-  padding: 28px 22px; position: relative;
+#qmdj-detail-modal.open { display: flex; }
+.qmdj-detail-inner {
+  width: 100%; max-width: 420px; margin: auto;
+  background: var(--navy); border: 1px solid rgba(0,191,255,0.25);
+  border-radius: 16px; padding: 24px 20px; position: relative;
 }
-.detail-close {
-  position: absolute; top: 16px; right: 16px; background: none; border: none;
-  color: var(--qgold); font-size: 24px; cursor: pointer; line-height: 1;
+.qmdj-detail-close {
+  position: absolute; top: 14px; right: 14px;
+  background: none; border: none; color: rgba(255,255,255,0.4);
+  font-family: 'Cinzel', serif; font-size: 11px; cursor: pointer; letter-spacing: 0.1em;
 }
 
-/* ── Toast ── */
-#toast {
-  position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%) translateY(20px);
-  background: rgba(201,168,76,0.15); border: 1px solid var(--qgold-dim);
-  border-radius: 30px; padding: 10px 24px; font-family: 'Cinzel', serif;
-  font-size: 11px; letter-spacing: 0.12em; color: var(--qgold);
-  opacity: 0; transition: opacity 0.3s, transform 0.3s; pointer-events: none; z-index: 99999;
-  white-space: nowrap;
-}
-#toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+/* Loading override — font only, rest from spgo-core.css */
+.sp-loading { font-family: 'IM Fell English', serif !important; }
 
-/* ── Logout popup portal variant ── */
+/* Logout popup portal button variant */
 #logout-popup button.btn-blue {
   border-color: rgba(0,191,255,0.4);
   color: rgba(0,191,255,0.85);
@@ -295,46 +360,63 @@ textarea::placeholder, input::placeholder { color: rgba(255,255,255,0.2); font-s
 
 <!-- Profile corner — shared component, populated by spgo-core.js -->
 <div id="profile-corner" onclick="toggleLogoutPopup()">
-  <img id="profile-corner-img" src="" alt="" class="flower-pic">
+  <img id="profile-corner-img" src="" alt="">
   <div id="profile-corner-code"></div>
 </div>
 <div id="logout-popup">
-  <button onclick="doLogout()">Sign out</button>
+  <button onclick="doLogout()">⟵ Log out</button>
 </div>
 
-<!-- ═══ LOGIN ═══ -->
+<!-- ═══════════════════════════════════════════════
+     LOGIN SCREEN
+     ═══════════════════════════════════════════════ -->
 <div id="screen-qmdj-login" class="screen active" data-screen-name="Login">
-  <img class="qmdj-login-logo" src="https://i.postimg.cc/dVY4nM6f/Botan-Shima-Dai-Jin-Adachi-Combo-2-Clean.png" alt="QMDJ">
-  <div class="qmdj-login-title">奇門遁甲</div>
-  <div class="qmdj-login-sub">Manifestation Portal</div>
+  <img src="https://i.postimg.cc/dVY4nM6f/Botan-Shima-Dai-Jin-Adachi-Combo-2-Clean.png" alt="QMDJ"
+    style="width:120px;height:auto;object-fit:contain;filter:drop-shadow(0 0 8px rgba(201,168,76,0.9)) drop-shadow(0 0 28px rgba(201,168,76,0.5));margin-bottom:20px;">
+  <div style="font-family:'Cinzel',serif;font-size:13px;letter-spacing:0.3em;color:#c9a84c;margin-bottom:6px;">奇門遁甲</div>
+  <div style="font-family:'IM Fell English',serif;font-style:italic;font-size:22px;color:#f5f0e8;margin-bottom:4px;">Manifestation</div>
+  <div style="font-family:'Cinzel',serif;font-size:12px;color:#e0b0ff;letter-spacing:0.2em;margin-bottom:40px;">Tsutsuji</div>
   <div class="card" onclick="startGoogleLogin()" style="max-width:320px;width:100%;justify-content:center;gap:12px;cursor:pointer;">
-    <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+    <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
     <span style="font-family:'Cinzel',serif;font-size:14px;color:white;">Sign in with Google</span>
   </div>
   <div id="login-error-qmdj" style="color:#ff8a80;font-size:13px;margin-top:16px;display:none;max-width:320px;text-align:center;"></div>
   <div style="font-family:'Crimson Pro',serif;font-size:11px;font-style:italic;color:rgba(255,255,255,0.3);margin-top:48px;">QMDJ Manifestation · Tsutsuji · SPGo</div>
 </div>
 
-<!-- ═══ VERIFYING ═══ -->
+<!-- VERIFYING SCREEN -->
 <div id="screen-qmdj-verify" class="screen" style="justify-content:center;gap:20px;" data-screen-name="Verifying">
   <img src="https://i.postimg.cc/dVY4nM6f/Botan-Shima-Dai-Jin-Adachi-Combo-2-Clean.png" class="sp-loading-img" style="width:80px;height:auto;object-fit:contain;">
   <div class="sp-loading">Loading…</div>
 </div>
 
-<!-- ═══ MAIN MENU ═══ -->
-<div id="screen-qmdj-menu" class="screen" data-screen-name="QMDJ Manifestation">
-  <div class="qmdj-menu-header">
-    <img class="qmdj-menu-logo" src="https://i.postimg.cc/dVY4nM6f/Botan-Shima-Dai-Jin-Adachi-Combo-2-Clean.png" alt="QMDJ">
-    <div class="qmdj-menu-title">奇門遁甲</div>
-    <div class="qmdj-menu-sub">Manifestation Portal</div>
+<!-- QMDJ SPLASH SCREEN — shown after login, tap to enter menu -->
+<div id="screen-qmdj-splash-entry" class="screen" style="padding:0; position:relative; overflow:hidden;" data-screen-name="QMDJ">
+  <div style="position:absolute; inset:0; background-image:url('https://i.postimg.cc/0Qcfyb1V/Botan-Shima-Dai-Jin-Adachi-Combo-3.png'); background-size:auto 100%; background-repeat:no-repeat; background-position:center; z-index:0;"></div>
+  <div style="position:absolute; inset:0; background:rgba(0,0,50,0.45); z-index:1;"></div>
+  <div style="position:relative; z-index:2; display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:100dvh; padding:40px 20px; text-align:center;" onclick="goTo('screen-qmdj-menu')">
+    <img src="https://i.postimg.cc/dVY4nM6f/Botan-Shima-Dai-Jin-Adachi-Combo-2-Clean.png" alt="QMDJ" style="max-height:200px; width:auto; filter:drop-shadow(0 0 8px rgba(201,168,76,0.95)) drop-shadow(0 0 28px rgba(201,168,76,0.55)) drop-shadow(0 0 60px rgba(201,168,76,0.25)); margin-bottom:24px;">
+    <div style="font-family:'Cinzel',serif; font-size:14px; letter-spacing:0.3em; color:#c9a84c; margin-bottom:10px;">奇門遁甲</div>
+    <div style="font-family:'IM Fell English',serif; font-size:18px; font-style:italic; color:rgba(255,245,220,0.8); margin-bottom:40px;">Tap anywhere to enter</div>
   </div>
-  <div class="ornament">✦ ✦ ✦</div>
-  <div class="cards">
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     QMDJ MAIN MENU
+     ═══════════════════════════════════════════════ -->
+<div id="screen-qmdj-menu" class="screen" data-screen-name="QMDJ Manifestation">
+  <div class="qmdj-menu-logo">
+    <img src="https://i.postimg.cc/dVY4nM6f/Botan-Shima-Dai-Jin-Adachi-Combo-2-Clean.png" alt="QMDJ">
+    <div class="qmdj-menu-logo-title">奇門遁甲</div>
+    <div class="qmdj-menu-logo-sub">Manifestation Portal</div>
+  </div>
+
+  <div class="cards" style="max-width:420px;">
     <div class="card card-tool" onclick="goTo('screen-qmdj-form')">
       <div class="card-icon" style="font-size:32px;">✨</div>
       <div class="card-text">
         <div class="card-title">Manifest Now</div>
-        <div class="card-desc">State your intention &amp; commit</div>
+        <div class="card-desc">State your intention · Commit · Manifest</div>
       </div>
       <div class="card-arrow">›</div>
     </div>
@@ -342,111 +424,124 @@ textarea::placeholder, input::placeholder { color: rgba(255,255,255,0.2); font-s
       <div class="card-icon" style="font-size:32px;">📜</div>
       <div class="card-text">
         <div class="card-title">Previous Manifestations</div>
-        <div class="card-desc">Your saved intentions · Local only</div>
+        <div class="card-desc">Your last 20 · Local only</div>
       </div>
       <div class="card-arrow">›</div>
     </div>
   </div>
+
   <div class="portal-footer">
-    <div class="footer-credit">QMDJ Manifestation Portal</div>
-    <div class="footer-copy">Tsutsuji · SPGo</div>
+    <div class="footer-credit">Developed by <strong>Claude</strong> · Conceived &amp; directed by <strong>SPGo</strong></div>
+    <div class="footer-copy">© 2026 · SPGo · All rights reserved</div>
   </div>
 </div>
 
-<!-- ═══ FORM ═══ -->
+<!-- ═══════════════════════════════════════════════
+     MANIFEST NOW — FORM SCREEN
+     ═══════════════════════════════════════════════ -->
 <div id="screen-qmdj-form" class="screen" data-screen-name="Manifest Now">
-  <div class="inner-header">
-    <button class="back-btn" onclick="goTo('screen-qmdj-menu')">‹ <span class="back-btn-label"></span></button>
-    <div class="inner-title">Manifest Now</div>
+  <div class="inner-header" style="max-width:420px; width:100%;">
+    <button class="back-btn" onclick="goTo('screen-qmdj-menu')">‹<span class="back-btn-label"></span></button>
+    <span class="inner-title">Manifest Now</span>
   </div>
-  <div class="form-wrap">
-    <div>
-      <div class="section-label">Elaborate Desired Outcome</div>
-      <div class="field-group">
-        <div>
-          <div class="field-label">Monetary</div>
-          <textarea id="f-monetary" rows="2" placeholder="e.g. Receive an unexpected financial gain of..."></textarea>
-        </div>
-        <div>
-          <div class="field-label">Timing</div>
-          <textarea id="f-timing" rows="2" placeholder="e.g. Within the next 30 days..."></textarea>
-        </div>
-        <div>
-          <div class="field-label">Other</div>
-          <textarea id="f-other" rows="3" placeholder="Any other details about the desired outcome..."></textarea>
-        </div>
-      </div>
+
+  <div style="width:100%; max-width:420px;">
+    <div class="qmdj-section-label">Elaborate Desired Outcome</div>
+
+    <div class="qmdj-field-wrap">
+      <div class="qmdj-field-label">Monetary</div>
+      <textarea id="f-monetary" class="qmdj-textarea" rows="2" placeholder="e.g. Receive an unexpected financial gain of..."></textarea>
     </div>
-    <div>
-      <div class="section-label">What You Commit</div>
-      <div class="commitment-list" id="commitment-list"></div>
-      <button class="add-commitment-btn" onclick="addCommitment()">+ Enter Another Commitment</button>
+    <div class="qmdj-field-wrap">
+      <div class="qmdj-field-label">Timing</div>
+      <textarea id="f-timing" class="qmdj-textarea" rows="2" placeholder="e.g. Within the next 30 days..."></textarea>
     </div>
-    <div class="manifest-section">
-      <button class="manifest-btn" onclick="startManifestation()">✦ Manifest ✦</button>
-      <p class="manifest-hint">Press the button, then close your eyes<br>and meditate to manifest your intention now.</p>
+    <div class="qmdj-field-wrap">
+      <div class="qmdj-field-label">Other</div>
+      <textarea id="f-other" class="qmdj-textarea" rows="3" placeholder="Any other details about the desired outcome..."></textarea>
+    </div>
+
+    <div class="qmdj-section-label">What You Commit</div>
+    <div class="qmdj-commitment-wrap" id="commitment-list"></div>
+    <button class="qmdj-add-btn" onclick="addCommitment()">+ Enter Another Commitment</button>
+
+    <div class="qmdj-manifest-wrap">
+      <button class="qmdj-manifest-btn" onclick="startManifestation()">✦ Manifest ✦</button>
+      <p class="qmdj-manifest-hint">Press the button, then close your eyes<br>and meditate to manifest your intention now.</p>
     </div>
   </div>
 </div>
 
-<!-- ═══ MANIFESTING SPLASH ═══ -->
-<div id="screen-qmdj-splash" class="screen" data-screen-name="Manifesting">
-  <img class="splash-img" src="https://i.postimg.cc/0Qcfyb1V/Botan-Shima-Dai-Jin-Adachi-Combo-3.png" alt="Manifesting">
-  <div class="manifesting-label">Manifesting</div>
-  <div class="manifesting-dots" id="manifesting-dots">·</div>
-  <div class="splash-progress">
-    <div class="progress-dot" id="dot-1"></div>
-    <div class="progress-dot" id="dot-2"></div>
-    <div class="progress-dot" id="dot-3"></div>
+<!-- ═══════════════════════════════════════════════
+     MANIFESTING SPLASH
+     ═══════════════════════════════════════════════ -->
+<div id="screen-qmdj-manifesting" class="screen" data-screen-name="Manifesting">
+  <img class="qmdj-splash-img" src="https://i.postimg.cc/0Qcfyb1V/Botan-Shima-Dai-Jin-Adachi-Combo-3.png" alt="Manifesting">
+  <div class="qmdj-manifesting-label">Manifesting</div>
+  <div class="qmdj-manifesting-dots" id="manifesting-dots">·</div>
+  <div class="qmdj-progress">
+    <div class="qmdj-dot" id="dot-1"></div>
+    <div class="qmdj-dot" id="dot-2"></div>
+    <div class="qmdj-dot" id="dot-3"></div>
   </div>
-  <button class="done-btn" id="done-btn" onclick="finishManifestation()">I am done — show my manifestation</button>
+  <button class="qmdj-done-btn" id="done-btn" onclick="finishManifestation()">I am done — show my manifestation</button>
 </div>
 
-<!-- ═══ RESULT ═══ -->
+<!-- ═══════════════════════════════════════════════
+     RESULT SCREEN
+     ═══════════════════════════════════════════════ -->
 <div id="screen-qmdj-result" class="screen" data-screen-name="Your Manifestation">
-  <div class="inner-header">
-    <button class="back-btn" onclick="goTo('screen-qmdj-menu')">‹ <span class="back-btn-label"></span></button>
-    <div class="inner-title">Your Manifestation</div>
+  <div class="inner-header" style="max-width:420px; width:100%;">
+    <button class="back-btn" onclick="goTo('screen-qmdj-menu')">‹<span class="back-btn-label"></span></button>
+    <span class="inner-title">Your Manifestation</span>
   </div>
-  <div class="ornament">✦ ✦ ✦</div>
-  <div class="result-card" id="result-card"></div>
-  <div class="result-actions">
-    <button onclick="downloadCard()">⬇ Download PNG</button>
+
+  <div class="qmdj-result-card" id="result-card"></div>
+
+  <div class="qmdj-result-actions">
+    <button class="btn-download" onclick="downloadCard()">⬇ Download PNG</button>
     <button onclick="goTo('screen-qmdj-menu')">↩ Main Menu</button>
   </div>
 </div>
 
-<!-- ═══ HISTORY ═══ -->
+<!-- ═══════════════════════════════════════════════
+     HISTORY SCREEN
+     ═══════════════════════════════════════════════ -->
 <div id="screen-qmdj-history" class="screen" data-screen-name="Previous Manifestations">
-  <div class="inner-header">
-    <button class="back-btn" onclick="goTo('screen-qmdj-menu')">‹ <span class="back-btn-label"></span></button>
-    <div class="inner-title">Previous Manifestations</div>
+  <div class="inner-header" style="max-width:420px; width:100%;">
+    <button class="back-btn" onclick="goTo('screen-qmdj-menu')">‹<span class="back-btn-label"></span></button>
+    <span class="inner-title">Previous Manifestations</span>
   </div>
-  <p class="history-note">Your last 20 manifestations are saved locally ONLY on this device. If you clear browser cache, they will be gone.</p>
-  <div id="history-list"></div>
+
+  <p class="qmdj-privacy-note">Your last 20 manifestations are saved locally ONLY on this device. If you clear browser cache, they will be gone.</p>
+
+  <div id="history-list" style="width:100%; max-width:420px;"></div>
+
+  <div class="portal-footer">
+    <div class="footer-credit">Developed by <strong>Claude</strong> · Conceived &amp; directed by <strong>SPGo</strong></div>
+    <div class="footer-copy">© 2026 · SPGo · All rights reserved</div>
+  </div>
 </div>
 
 <!-- ═══ DETAIL MODAL ═══ -->
-<div id="detail-modal">
-  <div class="detail-inner" id="detail-inner">
-    <button class="detail-close" onclick="closeDetail()">✕</button>
+<div id="qmdj-detail-modal">
+  <div class="qmdj-detail-inner" id="qmdj-detail-inner">
+    <button class="qmdj-detail-close" onclick="closeDetail()">✕ Close</button>
   </div>
 </div>
-
-<!-- ═══ TOAST ═══ -->
-<div id="toast"></div>
 
 <!-- Shared JS — must load before portal JS -->
 <script src="https://spgo5.github.io/Go5.SHARED/spgo-core.js"></script>
 <script>
 // ================================================================
-// QMDJ Manifestation Portal · Tsutsuji · SPGo
+// ✨ QMDJ Manifestation Portal · Tsutsuji · SPGo
 // ================================================================
 
-// ── Navigation (mirrors GYO pattern) ──
+// ── Screen navigation — identical pattern to GYO ──
 function goTo(screenId) {
   document.querySelectorAll('.screen').forEach(s => {
-    s.classList.remove('active'); s.style.display = 'none';
+    s.classList.remove('active');
+    s.style.display = 'none';
   });
   const el = document.getElementById(screenId);
   if (el) { el.style.display = 'flex'; el.classList.add('active'); window.scrollTo(0, 0); }
@@ -461,21 +556,33 @@ function goTo(screenId) {
       }
     });
   }
+  if (screenId === 'screen-qmdj-form')    initForm();
   if (screenId === 'screen-qmdj-history') renderHistory();
-  if (screenId === 'screen-qmdj-form') initForm();
 }
 
-// ── Login error display ──
+// ── JSONP helper — identical to GYO ──
+function gasJsonp(params, onSuccess, onError, timeoutMs) {
+  const cbName = 'gasCB_' + Date.now() + '_' + Math.floor(Math.random()*9999);
+  const script = document.createElement('script');
+  const timer = setTimeout(() => { cleanup(); if (onError) onError('Timeout'); }, timeoutMs || 15000);
+  function cleanup() { clearTimeout(timer); delete window[cbName]; if (script.parentNode) script.parentNode.removeChild(script); }
+  window[cbName] = function(data) { cleanup(); onSuccess(data); };
+  script.onerror = function() { cleanup(); if (onError) onError('Script load failed'); };
+  document.head.appendChild(script);
+  script.src = GAS_URL + '?' + params + '&callback=' + cbName;
+}
+
+// ── Login error ──
 function showLoginError(msg) {
   const el = document.getElementById('login-error-qmdj');
   if (el) { el.textContent = msg; el.style.display = 'block'; }
   goTo('screen-qmdj-login');
 }
 
-// ── Verifying screen ──
+// ── Verifying ──
 function showVerifying() { goTo('screen-qmdj-verify'); }
 
-// ── Google login — same flow as GYO, different redirectUri ──
+// ── Google login ──
 function startGoogleLogin() {
   const el = document.getElementById('login-error-qmdj');
   if (el) el.style.display = 'none';
@@ -502,13 +609,13 @@ async function validateWithToken(token) {
     if (!email) { showLoginError('Could not get your email. Please try again.'); return; }
     gasJsonp('action=validateEmail&email=' + encodeURIComponent(email), function(data) {
       if (data.valid) {
-        currentUser = data.idCode || email;
-        currentUserName = data.name || data.idCode || email;
+        currentUser         = data.idCode || email;
+        currentUserName     = data.name || data.idCode || email;
         currentFsSubscriber = data.fsSubscriber === true;
-        currentHasPortal = data.hasPortal === true;
-        currentHasBara = data.hasBara === true;
-        currentTier = data.tier || 0;
-        isGuest = false;
+        currentHasPortal    = data.hasPortal === true;
+        currentHasBara      = data.hasBara === true;
+        currentTier         = data.tier || 0;
+        isGuest             = false;
         try {
           localStorage.setItem('go_saved_user', JSON.stringify({
             user: currentUser, name: currentUserName,
@@ -530,7 +637,7 @@ async function validateWithToken(token) {
   }
 }
 
-// ── Check OAuth return or saved session ──
+// ── Check OAuth return or saved session — identical to GYO ──
 function checkOAuthReturn() {
   const hash = window.location.hash;
   if (hash && hash.includes('access_token')) {
@@ -548,13 +655,13 @@ function checkOAuthReturn() {
       const s = JSON.parse(saved);
       const age = Date.now() - (s.savedAt || 0);
       if (age < 30 * 24 * 3600 * 1000 && s.user && s.email) {
-        currentUser = s.user;
-        currentUserName = s.name || s.user;
+        currentUser         = s.user;
+        currentUserName     = s.name || s.user;
         currentFsSubscriber = !!s.fs;
-        currentHasPortal = !!s.portal;
-        currentHasBara = !!s.hasBara;
-        currentTier = s.tier || 0;
-        isGuest = false;
+        currentHasPortal    = !!s.portal;
+        currentHasBara      = !!s.hasBara;
+        currentTier         = s.tier || 0;
+        isGuest             = false;
         setHomeState();
         updateProfileCorner();
         return;
@@ -566,12 +673,12 @@ function checkOAuthReturn() {
   goTo('screen-qmdj-login');
 }
 
-// ── Set home state: go to menu ──
+// ── Set home state: show entry splash ──
 function setHomeState() {
-  goTo('screen-qmdj-menu');
+  goTo('screen-qmdj-splash-entry');
 }
 
-// ── Logout ──
+// ── Logout — identical to GYO ──
 function toggleLogoutPopup() {
   const popup = document.getElementById('logout-popup');
   if (!popup) return;
@@ -588,7 +695,7 @@ function doLogout() {
   goTo('screen-qmdj-login');
 }
 
-// ── Stubs required by spgo-core.js ──
+// ── Required stubs ──
 function applyTierGating() {}
 function applyFsSubscriberGating() {}
 function guestLogin() {}
@@ -596,22 +703,13 @@ function showIdInput() {}
 function loginWithId() {}
 function handleGoogleLogin() {}
 function initGoogleAuth() {}
-function gasJsonp(params, onSuccess, onError, timeoutMs) {
-  const cbName = 'gasCB_' + Date.now() + '_' + Math.floor(Math.random()*9999);
-  const script = document.createElement('script');
-  const timer = setTimeout(() => { cleanup(); if (onError) onError('Timeout'); }, timeoutMs || 15000);
-  function cleanup() { clearTimeout(timer); delete window[cbName]; if (script.parentNode) script.parentNode.removeChild(script); }
-  window[cbName] = function(data) { cleanup(); onSuccess(data); };
-  script.onerror = function() { cleanup(); if (onError) onError('Script load failed'); };
-  document.head.appendChild(script);
-  script.src = GAS_URL + '?' + params + '&callback=' + cbName;
-}
+function getTimeGreeting() { const h = new Date().getHours(); return h<12?'Good morning':h<17?'Good afternoon':h<21?'Good evening':'Good night'; }
 
 // ── Storage ──
-const QMDJ_KEY = 'qmdj_manifestations';
-const MAX_RECORDS = 20;
+const QMDJ_KEY   = 'qmdj_manifestations';
+const MAX_SAVED  = 20;
 function loadRecords() { try { return JSON.parse(localStorage.getItem(QMDJ_KEY)||'[]'); } catch(e) { return []; } }
-function saveRecords(arr) { localStorage.setItem(QMDJ_KEY, JSON.stringify(arr.slice(0, MAX_RECORDS))); }
+function saveRecords(arr) { localStorage.setItem(QMDJ_KEY, JSON.stringify(arr.slice(0, MAX_SAVED))); }
 
 // ── Form ──
 let commitCount = 0;
@@ -619,37 +717,38 @@ function initForm() {
   commitCount = 0;
   document.getElementById('commitment-list').innerHTML = '';
   document.getElementById('f-monetary').value = '';
-  document.getElementById('f-timing').value = '';
-  document.getElementById('f-other').value = '';
+  document.getElementById('f-timing').value   = '';
+  document.getElementById('f-other').value    = '';
   addCommitment();
 }
 function addCommitment() {
   commitCount++;
   const list = document.getElementById('commitment-list');
-  const div = document.createElement('div');
-  div.className = 'commitment-item';
+  const div  = document.createElement('div');
+  div.className = 'qmdj-commitment-item';
   div.innerHTML = `
-    <span class="commitment-bullet">◆</span>
-    <textarea rows="2" placeholder="I commit to..." class="commitment-field"></textarea>
-    ${commitCount > 1 ? `<button class="commitment-remove" onclick="this.parentElement.remove()">×</button>` : ''}
+    <span class="qmdj-commitment-bullet">◆</span>
+    <textarea rows="2" placeholder="I commit to..." class="qmdj-textarea commitment-field"></textarea>
+    ${commitCount > 1 ? `<button class="qmdj-remove-btn" onclick="this.parentElement.remove()">×</button>` : ''}
   `;
   list.appendChild(div);
   div.querySelector('textarea').focus();
 }
 
-// ── Manifestation ──
-let manifestTimers = [];
-let currentRecord = null;
+// ── Manifestation sequence ──
+let mTimers  = [];
+let mRecord  = null;
 
-function clearManifestTimers() {
-  manifestTimers.forEach(t => { if (typeof t === 'number') clearTimeout(t); else clearInterval(t); });
-  manifestTimers = [];
+function clearMTimers() {
+  mTimers.forEach(t => { if (typeof t === 'number') clearTimeout(t); else clearInterval(t); });
+  mTimers = [];
 }
 
 function playTing() {
   try {
-    const ctx = new (window.AudioContext || window.webkitAudioContext)();
-    const osc = ctx.createOscillator(); const gain = ctx.createGain();
+    const ctx  = new (window.AudioContext || window.webkitAudioContext)();
+    const osc  = ctx.createOscillator();
+    const gain = ctx.createGain();
     osc.connect(gain); gain.connect(ctx.destination);
     osc.type = 'sine';
     osc.frequency.setValueAtTime(880, ctx.currentTime);
@@ -661,117 +760,118 @@ function playTing() {
 }
 
 function startManifestation() {
-  const monetary = document.getElementById('f-monetary').value.trim();
-  const timing   = document.getElementById('f-timing').value.trim();
-  const other    = document.getElementById('f-other').value.trim();
+  const monetary    = document.getElementById('f-monetary').value.trim();
+  const timing      = document.getElementById('f-timing').value.trim();
+  const other       = document.getElementById('f-other').value.trim();
   const commitments = [...document.querySelectorAll('.commitment-field')].map(t => t.value.trim()).filter(Boolean);
   if (!monetary && !timing && !other) { showToast('Please elaborate your desired outcome first.'); return; }
-  if (!commitments.length) { showToast('Please enter at least one commitment.'); return; }
-  currentRecord = { id: Date.now(), datetime: new Date().toISOString(), monetary, timing, other, commitments };
-  const records = loadRecords(); records.unshift(currentRecord); saveRecords(records);
-  goTo('screen-qmdj-splash');
-  runSplashSequence();
+  if (!commitments.length)            { showToast('Please enter at least one commitment.'); return; }
+  mRecord = { id: Date.now(), datetime: new Date().toISOString(), monetary, timing, other, commitments };
+  const records = loadRecords(); records.unshift(mRecord); saveRecords(records);
+  goTo('screen-qmdj-manifesting');
+  runSequence();
 }
 
-function runSplashSequence() {
-  clearManifestTimers();
+function runSequence() {
+  clearMTimers();
   [1,2,3].forEach(i => document.getElementById('dot-'+i).classList.remove('lit'));
   document.getElementById('done-btn').style.display = 'none';
   let dotIdx = 0;
   const dotTexts = ['·','· ·','· · ·','· ·','·'];
-  const dotInterval = setInterval(() => {
+  const iv = setInterval(() => {
     document.getElementById('manifesting-dots').textContent = dotTexts[dotIdx++ % dotTexts.length];
   }, 600);
-  manifestTimers.push(dotInterval);
-  manifestTimers.push(setTimeout(() => { playTing(); document.getElementById('dot-1').classList.add('lit'); document.getElementById('done-btn').style.display = 'block'; }, 20000));
-  manifestTimers.push(setTimeout(() => { playTing(); document.getElementById('dot-2').classList.add('lit'); }, 40000));
-  manifestTimers.push(setTimeout(() => {
+  mTimers.push(iv);
+  mTimers.push(setTimeout(() => { playTing(); document.getElementById('dot-1').classList.add('lit'); document.getElementById('done-btn').style.display = 'block'; }, 20000));
+  mTimers.push(setTimeout(() => { playTing(); document.getElementById('dot-2').classList.add('lit'); }, 40000));
+  mTimers.push(setTimeout(() => {
     playTing(); document.getElementById('dot-3').classList.add('lit');
-    clearInterval(dotInterval);
-    setTimeout(finishManifestation, 1500);
+    clearInterval(iv); setTimeout(finishManifestation, 1500);
   }, 60000));
 }
 
 function finishManifestation() {
-  clearManifestTimers();
-  showResult(currentRecord);
+  clearMTimers();
+  renderResult(mRecord);
   goTo('screen-qmdj-result');
 }
 
-function showResult(record) {
+// ── Result ──
+function renderResult(r) {
   const card = document.getElementById('result-card');
-  const dt = new Date(record.datetime);
-  const dateStr = dt.toLocaleDateString('en-GB', {weekday:'long',day:'numeric',month:'long',year:'numeric'});
-  const timeStr = dt.toLocaleTimeString('en-GB', {hour:'2-digit',minute:'2-digit'});
-  let out = '';
-  if (record.monetary) out += `<div class="result-field"><div class="result-field-label">Monetary</div><div class="result-field-value">${esc(record.monetary)}</div></div>`;
-  if (record.timing)   out += `<div class="result-field"><div class="result-field-label">Timing</div><div class="result-field-value">${esc(record.timing)}</div></div>`;
-  if (record.other)    out += `<div class="result-field"><div class="result-field-label">Other</div><div class="result-field-value">${esc(record.other)}</div></div>`;
-  const commits = record.commitments.map(c => `<div class="result-commitment-item"><span class="result-bullet">◆</span><span>${esc(c)}</span></div>`).join('');
-  card.innerHTML = `
-    <div class="result-section-title">Desired Outcome</div>${out}
-    <div class="result-section-title" style="margin-top:20px;">My Commitment</div>${commits}
-    <div class="result-datetime">Manifested on ${dateStr} at ${timeStr}</div>`;
+  const dt   = new Date(r.datetime);
+  const dateStr = dt.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  const timeStr = dt.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
+  let out = '<div class="qmdj-result-section">Desired Outcome</div>';
+  if (r.monetary) out += `<div class="qmdj-result-field-label">Monetary</div><div class="qmdj-result-field-value">${esc(r.monetary)}</div>`;
+  if (r.timing)   out += `<div class="qmdj-result-field-label">Timing</div><div class="qmdj-result-field-value">${esc(r.timing)}</div>`;
+  if (r.other)    out += `<div class="qmdj-result-field-label">Other</div><div class="qmdj-result-field-value">${esc(r.other)}</div>`;
+  out += '<div class="qmdj-result-section" style="margin-top:18px;">My Commitment</div>';
+  out += r.commitments.map(c => `<div class="qmdj-result-commit-item"><span class="qmdj-result-bullet">◆</span><span>${esc(c)}</span></div>`).join('');
+  out += `<div class="qmdj-result-datetime">Manifested on ${dateStr} at ${timeStr}</div>`;
+  card.innerHTML = out;
 }
 
 // ── Download card ──
 function downloadCard() {
-  showToast('Preparing your card…');
-  const record = currentRecord || loadRecords()[0];
-  if (!record) { showToast('No record found.'); return; }
+  const r = mRecord || loadRecords()[0];
+  if (!r) { showToast('No record found.'); return; }
+  showToast('Preparing card…');
   const W = 600, pad = 40;
   const canvas = document.createElement('canvas'); canvas.width = W;
-  const ctx2 = canvas.getContext('2d');
-  const lines = [];
-  const dt = new Date(record.datetime);
-  lines.push({type:'title',text:'QMDJ Manifestation'});
-  lines.push({type:'section',text:'Desired Outcome'});
-  if (record.monetary) { lines.push({type:'label',text:'Monetary'}); lines.push({type:'value',text:record.monetary}); }
-  if (record.timing)   { lines.push({type:'label',text:'Timing'});   lines.push({type:'value',text:record.timing}); }
-  if (record.other)    { lines.push({type:'label',text:'Other'});    lines.push({type:'value',text:record.other}); }
-  lines.push({type:'section',text:'My Commitment'});
-  record.commitments.forEach(c => lines.push({type:'bullet',text:c}));
-  lines.push({type:'date',text:`Manifested on ${dt.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'})} at ${dt.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'})}`});
+  const ctx2   = canvas.getContext('2d');
+  const lines  = [];
+  const dt     = new Date(r.datetime);
+  lines.push({type:'title',   text:'QMDJ Manifestation'});
+  lines.push({type:'section', text:'Desired Outcome'});
+  if (r.monetary) { lines.push({type:'label',text:'Monetary'}); lines.push({type:'value',text:r.monetary}); }
+  if (r.timing)   { lines.push({type:'label',text:'Timing'});   lines.push({type:'value',text:r.timing}); }
+  if (r.other)    { lines.push({type:'label',text:'Other'});    lines.push({type:'value',text:r.other}); }
+  lines.push({type:'section', text:'My Commitment'});
+  r.commitments.forEach(c => lines.push({type:'bullet', text:c}));
+  lines.push({type:'date', text:`Manifested on ${dt.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'})} at ${dt.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'})}`});
   let H = pad;
+  ctx2.font = '17px serif';
   lines.forEach(l => {
-    if (l.type==='title') H+=60;
-    else if (l.type==='section') H+=44;
-    else if (l.type==='label') H+=24;
-    else if (l.type==='value'||l.type==='bullet') {
-      ctx2.font='17px serif';
+    if      (l.type==='title')   H += 60;
+    else if (l.type==='section') H += 44;
+    else if (l.type==='label')   H += 24;
+    else if (l.type==='date')    H += 40;
+    else {
+      const words = ((l.type==='bullet'?'◆  ':'')+l.text).split(' ');
       let line='', lh=0;
-      ((l.type==='bullet'?'◆  ':'')+l.text).split(' ').forEach(w => { const t=line+w+' '; if(ctx2.measureText(t).width>W-pad*2&&line){lh++;line=w+' ';}else line=t; });
-      H+=(lh+1)*26+8;
-    } else H+=32;
+      words.forEach(w => { const t=line+w+' '; if(ctx2.measureText(t).width>W-pad*2&&line){lh++;line=w+' ';}else line=t; });
+      H += (lh+1)*26+10;
+    }
   });
   H += pad; canvas.height = H;
   const grad = ctx2.createLinearGradient(0,0,0,H);
-  grad.addColorStop(0,'#000040'); grad.addColorStop(1,'#000025');
+  grad.addColorStop(0,'#000073'); grad.addColorStop(1,'#00004a');
   ctx2.fillStyle = grad; ctx2.fillRect(0,0,W,H);
-  ctx2.strokeStyle = 'rgba(201,168,76,0.5)'; ctx2.lineWidth = 1; ctx2.strokeRect(10,10,W-20,H-20);
+  ctx2.strokeStyle = 'rgba(0,191,255,0.4)'; ctx2.lineWidth = 1; ctx2.strokeRect(10,10,W-20,H-20);
   let y = pad;
   lines.forEach(l => {
     if (l.type==='title') {
-      ctx2.fillStyle='#c9a84c'; ctx2.font='bold 18px serif'; ctx2.textAlign='center';
-      ctx2.fillText(l.text,W/2,y+20);
-      ctx2.fillStyle='rgba(201,168,76,0.3)'; ctx2.fillRect(pad,y+34,W-pad*2,1); y+=60;
+      ctx2.fillStyle='#00BFFF'; ctx2.font='bold 16px serif'; ctx2.textAlign='center';
+      ctx2.fillText(l.text,W/2,y+18);
+      ctx2.fillStyle='rgba(0,191,255,0.25)'; ctx2.fillRect(pad,y+28,W-pad*2,1); y+=60;
     } else if (l.type==='section') {
-      ctx2.fillStyle='#c9a84c'; ctx2.font='bold 11px serif'; ctx2.textAlign='left';
-      ctx2.fillText(l.text.toUpperCase(),pad,y+16);
-      ctx2.fillStyle='rgba(201,168,76,0.25)'; ctx2.fillRect(pad,y+22,W-pad*2,1); y+=44;
+      ctx2.fillStyle='rgba(255,255,255,0.35)'; ctx2.font='bold 10px serif'; ctx2.textAlign='left';
+      ctx2.fillText(l.text.toUpperCase(),pad,y+14);
+      ctx2.fillStyle='rgba(255,255,255,0.08)'; ctx2.fillRect(pad,y+20,W-pad*2,1); y+=44;
     } else if (l.type==='label') {
-      ctx2.fillStyle='rgba(255,245,220,0.4)'; ctx2.font='10px serif'; ctx2.textAlign='left';
-      ctx2.fillText(l.text.toUpperCase(),pad,y+12); y+=24;
+      ctx2.fillStyle='rgba(255,255,255,0.25)'; ctx2.font='9px serif'; ctx2.textAlign='left';
+      ctx2.fillText(l.text.toUpperCase(),pad,y+10); y+=24;
     } else if (l.type==='value'||l.type==='bullet') {
-      ctx2.fillStyle='rgba(255,245,220,0.9)'; ctx2.font='17px serif'; ctx2.textAlign='left';
+      ctx2.fillStyle='#f5f0e8'; ctx2.font='17px serif'; ctx2.textAlign='left';
       const words = ((l.type==='bullet'?'◆  ':'')+l.text).split(' ');
       let line='', ly=y+20;
       words.forEach(w => { const t=line+w+' '; if(ctx2.measureText(t).width>W-pad*2&&line){ctx2.fillText(line.trim(),pad,ly);ly+=26;line=w+' ';}else line=t; });
       ctx2.fillText(line.trim(),pad,ly); y=ly+16;
     } else if (l.type==='date') {
-      ctx2.fillStyle='rgba(201,168,76,0.25)'; ctx2.fillRect(pad,y,W-pad*2,1); y+=16;
+      ctx2.fillStyle='rgba(255,255,255,0.1)'; ctx2.fillRect(pad,y,W-pad*2,1); y+=14;
       ctx2.fillStyle='rgba(255,245,220,0.35)'; ctx2.font='10px serif'; ctx2.textAlign='center';
-      ctx2.fillText(l.text,W/2,y+12); y+=32;
+      ctx2.fillText(l.text,W/2,y+12); y+=30;
     }
   });
   const a = document.createElement('a');
@@ -783,48 +883,50 @@ function downloadCard() {
 
 // ── History ──
 function renderHistory() {
-  const list = document.getElementById('history-list');
+  const list    = document.getElementById('history-list');
   const records = loadRecords();
-  if (!records.length) { list.innerHTML = '<div class="history-empty">No manifestations yet.<br>Begin your first one now.</div>'; return; }
+  if (!records.length) {
+    list.innerHTML = '<div class="qmdj-hist-empty">No manifestations yet.<br>Begin your first one now.</div>';
+    return;
+  }
   list.innerHTML = records.map((r,i) => {
-    const dt = new Date(r.datetime);
-    const tags = [r.monetary&&'Monetary', r.timing&&'Timing', r.other&&'Other'].filter(Boolean);
+    const dt      = new Date(r.datetime);
+    const tags    = [r.monetary&&'Monetary', r.timing&&'Timing', r.other&&'Other'].filter(Boolean);
     const preview = [r.monetary, r.timing, r.other].filter(Boolean).join(' · ');
-    return `<div class="history-card" onclick="openDetail(${i})">
-      <div class="history-card-top">
-        <div class="history-card-num">Manifestation #${records.length-i}</div>
-        <div class="history-card-date">${dt.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}</div>
+    return `<div class="qmdj-hist-card" onclick="openDetail(${i})">
+      <div class="qmdj-hist-card-top">
+        <div class="qmdj-hist-card-num">Manifestation #${records.length - i}</div>
+        <div class="qmdj-hist-card-date">${dt.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}</div>
       </div>
-      <div class="history-card-outcome">${esc(preview)}</div>
-      <div class="history-card-tags">
-        ${tags.map(t=>`<span class="history-tag">${t}</span>`).join('')}
-        <span class="history-tag">${r.commitments.length} commitment${r.commitments.length!==1?'s':''}</span>
+      <div class="qmdj-hist-card-preview">${esc(preview)}</div>
+      <div class="qmdj-hist-card-tags">
+        ${tags.map(t=>`<span class="qmdj-hist-tag">${t}</span>`).join('')}
+        <span class="qmdj-hist-tag">${r.commitments.length} commitment${r.commitments.length!==1?'s':''}</span>
       </div>
     </div>`;
   }).join('');
 }
 
 function openDetail(idx) {
-  const records = loadRecords(); const r = records[idx]; if (!r) return;
-  currentRecord = r;
-  const dt = new Date(r.datetime);
+  const r = loadRecords()[idx]; if (!r) return;
+  mRecord = r;
+  const dt      = new Date(r.datetime);
   const dateStr = dt.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
   const timeStr = dt.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
-  let out = '';
-  if (r.monetary) out += `<div class="result-field"><div class="result-field-label">Monetary</div><div class="result-field-value">${esc(r.monetary)}</div></div>`;
-  if (r.timing)   out += `<div class="result-field"><div class="result-field-label">Timing</div><div class="result-field-value">${esc(r.timing)}</div></div>`;
-  if (r.other)    out += `<div class="result-field"><div class="result-field-label">Other</div><div class="result-field-value">${esc(r.other)}</div></div>`;
-  const commits = r.commitments.map(c=>`<div class="result-commitment-item"><span class="result-bullet">◆</span><span>${esc(c)}</span></div>`).join('');
-  document.getElementById('detail-inner').innerHTML = `
-    <button class="detail-close" onclick="closeDetail()">✕</button>
-    <div class="result-section-title">Desired Outcome</div>${out}
-    <div class="result-section-title" style="margin-top:18px;">My Commitment</div>${commits}
-    <div class="result-datetime">Manifested on ${dateStr} at ${timeStr}</div>
-    <div class="result-actions" style="margin-top:20px;">
-      <button onclick="downloadCard()">⬇ Download PNG</button>
-      <button onclick="deleteRecord(${idx})">🗑 Delete</button>
-    </div>`;
-  document.getElementById('detail-modal').classList.add('open');
+  let out = '<div class="qmdj-result-section">Desired Outcome</div>';
+  if (r.monetary) out += `<div class="qmdj-result-field-label">Monetary</div><div class="qmdj-result-field-value">${esc(r.monetary)}</div>`;
+  if (r.timing)   out += `<div class="qmdj-result-field-label">Timing</div><div class="qmdj-result-field-value">${esc(r.timing)}</div>`;
+  if (r.other)    out += `<div class="qmdj-result-field-label">Other</div><div class="qmdj-result-field-value">${esc(r.other)}</div>`;
+  out += '<div class="qmdj-result-section" style="margin-top:18px;">My Commitment</div>';
+  out += r.commitments.map(c => `<div class="qmdj-result-commit-item"><span class="qmdj-result-bullet">◆</span><span>${esc(c)}</span></div>`).join('');
+  out += `<div class="qmdj-result-datetime">Manifested on ${dateStr} at ${timeStr}</div>`;
+  out += `<div class="qmdj-result-actions" style="margin-top:16px;">
+    <button class="btn-download" onclick="downloadCard()">⬇ Download PNG</button>
+    <button class="btn-del" onclick="deleteRecord(${idx})">🗑 Delete</button>
+  </div>`;
+  document.getElementById('qmdj-detail-inner').innerHTML =
+    `<button class="qmdj-detail-close" onclick="closeDetail()">✕ Close</button>` + out;
+  document.getElementById('qmdj-detail-modal').classList.add('open');
 }
 
 function deleteRecord(idx) {
@@ -832,10 +934,19 @@ function deleteRecord(idx) {
   const records = loadRecords(); records.splice(idx,1); saveRecords(records);
   closeDetail(); renderHistory(); showToast('Deleted.');
 }
-function closeDetail() { document.getElementById('detail-modal').classList.remove('open'); }
+function closeDetail() { document.getElementById('qmdj-detail-modal').classList.remove('open'); }
 
 function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>'); }
-function showToast(msg) { const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2800); }
+function showToast(msg) {
+  let t = document.getElementById('qmdj-toast');
+  if (!t) {
+    t = document.createElement('div'); t.id = 'qmdj-toast';
+    t.style.cssText = 'position:fixed;bottom:40px;left:50%;transform:translateX(-50%) translateY(20px);background:rgba(0,0,60,0.95);border:1px solid rgba(0,191,255,0.3);border-radius:30px;padding:10px 24px;font-family:Cinzel,serif;font-size:11px;letter-spacing:0.12em;color:#00BFFF;opacity:0;transition:opacity 0.3s,transform 0.3s;pointer-events:none;z-index:99999;white-space:nowrap;';
+    document.body.appendChild(t);
+  }
+  t.textContent = msg; t.style.opacity = '1'; t.style.transform = 'translateX(-50%) translateY(0)';
+  setTimeout(() => { t.style.opacity = '0'; t.style.transform = 'translateX(-50%) translateY(20px)'; }, 2800);
+}
 
 // ── Boot ──
 checkOAuthReturn();

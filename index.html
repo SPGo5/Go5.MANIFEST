@@ -586,7 +586,7 @@ function showVerifying() { goTo('screen-qmdj-verify'); }
 function startGoogleLogin() {
   const el = document.getElementById('login-error-qmdj');
   if (el) el.style.display = 'none';
-  const redirectUri = window.location.origin + '/Go5.QMDJ/index.html';
+  const redirectUri = window.location.origin + '/Go5.MANIFEST/index.html';
   const params = new URLSearchParams({
     client_id: GOOGLE_CLIENT_ID,
     redirect_uri: redirectUri,
